@@ -25,6 +25,17 @@ export const ROUTES: RouteInfo[] = [{
         type: 'link',
         icontype: 'nc-icon nc-bank'
     },
+    {
+        path: '/manage',
+        title: 'Manage',
+        type: 'sub',
+        collapse: 'orders',
+        icontype: 'fa fa-tasks',
+        children: [
+            { path: 'std', title: 'Add Stanadard', ab: 'AS' },
+          
+        ]
+    },
 ];
 
 @Component({
