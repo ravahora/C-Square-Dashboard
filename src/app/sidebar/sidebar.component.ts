@@ -33,6 +33,7 @@ export const ROUTES: RouteInfo[] = [{
         icontype: 'fa fa-tasks',
         children: [
             { path: 'std', title: 'Add Stanadard', ab: 'AS' },
+            { path: 'subject', title: 'Add Subject', ab: 'AS' },
           
         ]
     },
