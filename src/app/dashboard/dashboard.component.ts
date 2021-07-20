@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ManageService } from 'app/manage/manage.service';
+import { Std } from 'app/manage/standard/standard.model';
+import { Subject } from 'app/manage/subject/subject.model';
 import Chart from 'chart.js';
 
 declare const $: any;
@@ -10,7 +13,7 @@ declare const $: any;
 export class DashboardComponent implements OnInit {
   public gradientStroke;
   public chartColor;
-  public canvas : any;
+  public canvas: any;
   public ctx;
   public gradientFill;
   // constructor(private navbarTitleService: NavbarTitleService) { }
@@ -18,16 +21,18 @@ export class DashboardComponent implements OnInit {
   public gradientChartOptionsConfigurationWithNumbersAndGrid: any;
 
   public activeUsersChartType;
-  public activeUsersChartData:Array<any>;
-  public activeUsersChartOptions:any;
-  public activeUsersChartLabels:Array<any>;
-  public activeUsersChartColors:Array<any>
+  public activeUsersChartData: Array<any>;
+  public activeUsersChartOptions: any;
+  public activeUsersChartLabels: Array<any>;
+  public activeUsersChartColors: Array<any>
 
-  public chartClicked(e:any):void {
+  public subjects: Subject[]=[];
+  public stdlist: Std[] = [];
+  public chartClicked(e: any): void {
     console.log(e);
   }
 
-  public chartHovered(e:any):void {
+  public chartHovered(e: any): void {
     console.log(e);
   }
   public hexToRGB(hex, alpha) {
@@ -40,6 +45,12 @@ export class DashboardComponent implements OnInit {
     } else {
       return "rgb(" + r + ", " + g + ", " + b + ")";
     }
+  }
+  constructor(
+    private manageService: ManageService
+  ) {
+    this.getDashboardStdList();
+    this.getStdWiseSubjects();
   }
   public ngOnInit() {
     this.chartColor = "#FFFFFF";
@@ -146,7 +157,7 @@ export class DashboardComponent implements OnInit {
     });
 
     Chart.pluginService.register({
-      beforeDraw: function(chart) {
+      beforeDraw: function (chart) {
         if (chart.config.options.elements.center) {
           //Get ctx from string
           var ctx = chart.chart.ctx;
@@ -665,40 +676,54 @@ export class DashboardComponent implements OnInit {
 
 
     var mapData = {
-        "AU": 760,
-        "BR": 550,
-        "CA": 120,
-        "DE": 1300,
-        "FR": 540,
-        "GB": 690,
-        "GE": 200,
-        "IN": 200,
-        "RO": 600,
-        "RU": 300,
-        "US": 2920,
+      "AU": 760,
+      "BR": 550,
+      "CA": 120,
+      "DE": 1300,
+      "FR": 540,
+      "GB": 690,
+      "GE": 200,
+      "IN": 200,
+      "RO": 600,
+      "RU": 300,
+      "US": 2920,
     };
 
     $('#worldMap').vectorMap({
-        map: 'world_mill_en',
-        backgroundColor: "transparent",
-        zoomOnScroll: false,
-        regionStyle: {
-            initial: {
-                fill: '#e4e4e4',
-                "fill-opacity": 0.9,
-                stroke: 'none',
-                "stroke-width": 0,
-                "stroke-opacity": 0
-            }
-        },
+      map: 'world_mill_en',
+      backgroundColor: "transparent",
+      zoomOnScroll: false,
+      regionStyle: {
+        initial: {
+          fill: '#e4e4e4',
+          "fill-opacity": 0.9,
+          stroke: 'none',
+          "stroke-width": 0,
+          "stroke-opacity": 0
+        }
+      },
 
-        series: {
-            regions: [{
-                values: mapData,
-                scale: ["#AAAAAA","#444444"],
-                normalizeFunction: 'polynomial'
-            }]
-        },
+      series: {
+        regions: [{
+          values: mapData,
+          scale: ["#AAAAAA", "#444444"],
+          normalizeFunction: 'polynomial'
+        }]
+      },
+    });
+  }
+  getDashboardStdList() {
+    this.manageService.getStdList().subscribe((data: any) => {
+      this.stdlist = data;
+    });
+  }
+  openStd(id) {
+    debugger
+  }
+  getStdWiseSubjects(){
+    this.manageService.getSubjectList().subscribe((data: any) => {
+      this.subjects = data;
+      debugger
     });
   }
 }

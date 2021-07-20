@@ -1,18 +1,18 @@
 <div class="main-content">
   <div class="row">
-    <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="col-lg-3 col-md-6 col-sm-6" *ngFor="let s of stdlist;let i=index">
       <div class="card card-stats">
         <div class="card-body ">
           <div class="row">
             <div class="col-5 col-md-4">
               <div class="icon-big text-center icon-warning">
-                <i class="nc-icon nc-globe text-warning"></i>
+                <i class="fa fa-university"></i>
               </div>
             </div>
-            <div class="col-7 col-md-8">
+            <div class="col-7 col-md-8" >
               <div class="numbers">
-                <p class="card-category">Capacity</p>
-                <p class="card-title">150GB
+                <p class="card-title">{{s.stdname}}</p>
+                <p class="card-category">150GB
                 </p>
               </div>
             </div>
@@ -20,7 +20,7 @@
         </div>
         <div class="card-footer ">
           <hr>
-          <div class="stats">
+          <div class="stats" (click)="openStd(s.id)">
             <i class="fa fa-refresh"></i> Update Now
           </div>
         </div>

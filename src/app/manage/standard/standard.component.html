@@ -1,1 +1,78 @@
-<p>standard works!</p>
+<div class="main-content">
+    <div class="card" >
+        <div class="card-header">
+            <h4 class="card-title">Add Standard</h4>
+        </div>
+        <div class="card-body">
+            <form class="form-horizontal" name="stdRegForm" #stdRegForm="ngForm">
+                <div class="row">
+                    <label class="col-md-2 col-form-label">Enter Standard</label>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="stdname" name="stdname"
+                            [(ngModel)]="StdModel.stdname" placeholder="Enter Standard">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer ">
+            <div class="row">
+                <div class="col-md-11"></div>
+                <!-- <div class="col-md-1">
+                    <button type="cancel" class="btn btn-round" (click)="closeAddBank()" >Cancel</button>
+                </div> -->
+                <div class="col-md-1">
+                    <button type="submit" (click)="addStdList()" class="btn btn-info btn-round">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Bank with Rate Of Interest Table</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="text-primary">
+                        <th class="text-center">
+                            #
+                        </th>
+                        <th class="text-center">
+                            Standard Name
+                        </th>
+                        <!-- <th class="text-center">
+                            EMI Month
+                        </th>
+                        <th class="text-center">
+                            Rate Of Interest
+                        </th> -->
+                        <!-- <th class="text-right">
+                            Salary
+                        </th> -->
+                        <th class="text-right">
+                            Actions
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let s of STD;let i=index">
+                            <td class="text-center">{{i+1}}</td>
+                            <td class="text-center">{{s.stdname}}</td>
+                            <!-- <td class="text-center">{{r.months}} Months</td>
+                            <td class="text-center">{{r.intrest}} %</td> -->
+                            <td class="text-right">
+                                <!-- <button type="button" rel="tooltip" class="btn btn-success btn-icon btn-sm">
+                                    <i class="fa fa-edit"></i>
+                                </button> -->
+                                <button type="button" rel="tooltip" class="btn btn-danger btn-icon btn-sm" (click)="removeStandard(s.id)">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
