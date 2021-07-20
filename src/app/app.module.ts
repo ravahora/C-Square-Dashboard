@@ -15,20 +15,22 @@ import { NavbarModule} from './shared/navbar/navbar.module';
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AppRoutes } from './app.routing';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports:      [
         BrowserAnimationsModule,
         FormsModule,
         RouterModule.forRoot(AppRoutes,{
-          useHash: true
+          useHash: false
         }),
         NgbModule,
         HttpModule,
         SidebarModule,
         NavbarModule,
         FooterModule,
-        FixedPluginModule
+        FixedPluginModule,
+        HttpClientModule
     ],
     declarations: [
         AppComponent,
